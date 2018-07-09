@@ -19,7 +19,7 @@ class SelectPlace:
         return lis
         
 
-    def search_city(self,pref):
+    def city_list(self,pref):
         l = []
         a1 = ".//*[@title='" + str(pref) + "']//"
         for city in self.root.iterfind(a1):
@@ -65,9 +65,9 @@ def region_h(message):
     if region not in ["道北","道南","道東","道央"]:
         message.send("入力が誤っています\n全半角や、スペース、漢字等を確認して、入力し直してください")
     global t
-    city_list = a.search_city(region)
-    t = '以下の中から選択してください(例:city '+ city_list[0] +')'
-    for c in city_list:
+    cities = a.city_list(region)
+    t = '以下の中から選択してください(例:city '+ cities[0] +')'
+    for c in cities:
         t = t + "\n" + c
     message.send(t)
     global pref
@@ -93,16 +93,16 @@ def prefecture(message):
             message.send("入力が誤っています\n全半角、スペース、漢字、都・道・府・県が入っているか、等を確認して、入力し直してください")
         else:    
             global t
-            city_list = a.search_city(pref)
-            t = '以下の中から選択してください(例:city '+ city_list[0] +')'
-            for c in city_list:
+            cities = a.city_list(pref)
+            t = '以下の中から選択してください(例:city '+ cities[0] +')'
+            for c in cities:
                 t = t + "\n" + c
             message.send(t)
 
 @slackbot.bot.respond_to(r'^city\s+\S.*')
 def cities(message):
     city = a.get_text(message)
-    if city in a.search_city(pref):
+    if city in a.city_list(pref):
         data = a.return_data(city)
         data = data['forecasts']
         text = ""
