@@ -7,7 +7,7 @@ import requests
 
 @slackbot.bot.respond_to('hello')
 def resp_hello(message):
-    message.reply('こんにちは')
+    message.reply('こんにちは!q')
 
 def fizzbuzz(num):
     '''fissbuzz 判定
