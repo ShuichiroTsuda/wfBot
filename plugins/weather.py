@@ -18,7 +18,6 @@ class SelectPlace:
             lis.append(a['title'])
         return lis
         
-
     def city_list(self,pref):
         l = []
         a1 = ".//*[@title='" + str(pref) + "']//"
@@ -43,9 +42,6 @@ class SelectPlace:
         data = json.loads(res.text)
         return data
 
-
-
-        
 xml_url = 'http://weather.livedoor.com/forecast/rss/primary_area.xml'
 a = SelectPlace(xml_url)
 
@@ -57,8 +53,6 @@ def start(message):
 def pref_h(message):
     message.send('以下の中から選択し,入力してください\n道北\n道東\n道南\n道央\n(例：region 道南)')
     
-
-
 @slackbot.bot.respond_to(r'^region\s+\S.*')
 def region_h(message):
     region = a.get_text(message)
@@ -83,7 +77,6 @@ def pref_o(message):
         text = text + info['dateLabel'] + " " + info['telop'] + "\n"
     message.send(text)
     
-
 @slackbot.bot.respond_to(r'^pref\s+\S.*')
 def prefecture(message):
     global pref
